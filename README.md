@@ -12,7 +12,7 @@ This repository contains two Node.js scripts that help you capture Kindle book p
   - Prompts for a book name and saves screenshots under `screenshots/{bookname}/page_x.png`.
   - Stops capturing when two consecutive screenshots are identical.
 
-- **PDF Conversion Script (`pdf-script.js`):**  
+- **PDF Conversion Script (`screenshot-to-pdf.js`):**  
   Converts the captured screenshots into a PDF using pdf-lib.
   - Lists available book directories from the `screenshots` folder.
   - Provides an interactive menu (using arrow keys) to select a book (displays up to 5 at a time).

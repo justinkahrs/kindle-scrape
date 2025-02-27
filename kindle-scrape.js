@@ -98,7 +98,7 @@ const VIEWPORT_HEIGHT = 1400;
     await page.keyboard.press("ArrowRight");
 
     // Delay to allow the page to render
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    await new Promise((resolve) => setTimeout(resolve, 500));
 
     pageIndex++;
   }
