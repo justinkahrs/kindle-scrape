@@ -2,7 +2,8 @@ const puppeteer = require("puppeteer");
 const fs = require("fs-extra");
 const path = require("path");
 const readline = require("readline");
-const { exec } = require("child_process");
+const { spawn } = require("child_process");
+const { updateProgress } = require("./progressBar");
 
 // Helper function for prompting user input
 function prompt(question) {
@@ -90,7 +91,7 @@ const VIEWPORT_HEIGHT = 1400;
     // Save the screenshot to the book-specific directory
     const screenshotPath = path.join(SCREENSHOT_DIR, `page_${pageIndex}.png`);
     await fs.writeFile(screenshotPath, screenshotBuffer);
-    console.log(`Captured: ${screenshotPath}`);
+    updateProgress(pageIndex);
 
     // Update previous screenshot buffer
     previousScreenshot = screenshotBuffer;
@@ -103,14 +104,12 @@ const VIEWPORT_HEIGHT = 1400;
 
     pageIndex++;
   }
+  console.log('');
 
   console.log("Screenshots captured. Closing browser...");
   await browser.close();
-  exec("node screenshots-to-pdf.js", (error, stdout, stderr) => {
-    if (error) {
-      console.error(`Error running screenshots-to-pdf.js: ${error}`);
-      return;
-    }
-    console.log(stdout);
+  const pdfProcess = spawn("node", ["screenshots-to-pdf.js", bookName], { stdio: "inherit" });
+  pdfProcess.on("close", (code) => {
+    process.exit(code);
   });
 })();

@@ -37,15 +37,16 @@ npm i
 
 ### Usage
 
-1. Run the scrape script, `npm run scrape`, this will do the following:
+1.`npm run scrape`:
 
-   - Login: If no session exists, you’ll be prompted to log in manually to Amazon Kindle Reader.
-   - Navigation: Once logged in, navigate manually to the desired book and page (you probably want to start at the beginning 😅) and press Enter.
-   - Book Name: When prompted, enter a name for the book. Screenshots will be saved to screenshots/{bookname}/.
-   - Capture: The script will capture pages until it detects no change between consecutive screenshots (ie the end of the book).
-   - Run PDF conversion
+- If no session exists, you’ll be prompted to **log in** manually to Amazon Kindle Reader.
+- Once logged in, **navigate** manually to the desired book and page (you probably want to start at the beginning 😅) and press Enter.
+- When prompted, **enter a name** for the book. Screenshots will be saved to screenshots/{bookname}/.
+- The script will capture pages until it detects no change between consecutive screenshots (ie the end of the book).
+- Automatically run PDF conversion
 
-2. (optionally) Run the PDF conversion script, `npm run pdf`, this will do the following:
-   - Select Book: Use the arrow keys (up/down) to navigate through the list of available book directories (displayed 5 at a time) and press Enter to select one.
-   - Processing: The script reads and sorts the screenshots, then builds a PDF with a progress bar display.
-   - Output: The PDF is saved as ebooks/{bookname}.pdf.
+2. (optionally) `npm run pdf`:
+
+- Use the arrow keys (up/down) to navigate through the list of available book directories (**> indicates selected directory**) and press Enter to select one.
+- The script reads and sorts the screenshots, then builds a PDF with a progress bar display.
+- Output: The PDF is saved as ebooks/{bookname}.pdf.

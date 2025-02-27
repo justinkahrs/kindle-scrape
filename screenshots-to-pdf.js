@@ -1,6 +1,7 @@
 const { PDFDocument } = require("pdf-lib");
 const fs = require("fs-extra");
 const path = require("path");
+const { updateProgress } = require("./progressBar");
 
 // Interactive selection function using raw mode and arrow keys
 async function selectDirectory(dirs) {
@@ -56,8 +57,8 @@ async function selectDirectory(dirs) {
       }
     }
 
-    if (typeof process.stdin.setRawMode !== 'function') {
-      console.log("Interactive mode not supported, defaulting to first directory.");
+    if (typeof process.stdin.setRawMode !== "function") {
+      console.log("Begin processing images...");
       resolve(dirs[0]);
       return;
     }
@@ -82,8 +83,14 @@ async function selectDirectory(dirs) {
     process.exit(1);
   }
 
-  // Use the interactive menu to select a directory.
-  const chosenBook = await selectDirectory(dirs);
+  let chosenBook;
+  if (process.argv[2] && dirs.includes(process.argv[2])) {
+    chosenBook = process.argv[2];
+    console.log(`Using book directory from argument: ${chosenBook}`);
+  } else {
+    // Use the interactive menu to select a directory.
+    chosenBook = await selectDirectory(dirs);
+  }
   const BOOK_SCREENSHOT_DIR = path.join(BASE_DIR, chosenBook);
 
   // Ensure the ebooks directory exists
@@ -108,7 +115,9 @@ async function selectDirectory(dirs) {
 
   const pdfDoc = await PDFDocument.create();
 
-  for (const file of files) {
+  const progressBarWidth = 20;
+  for (let i = 0; i < files.length; i++) {
+    const file = files[i];
     const imgPath = path.join(BOOK_SCREENSHOT_DIR, file);
     const imageBytes = await fs.readFile(imgPath);
     const image = await pdfDoc.embedPng(imageBytes);
@@ -122,8 +131,10 @@ async function selectDirectory(dirs) {
       height: image.height,
     });
 
-    console.log(`Added ${file} to PDF`);
+    // Update progress bar using utility function
+    updateProgress(i + 1, files.length);
   }
+  console.log("\nSaving PDF...");
 
   const pdfBytes = await pdfDoc.save();
   await fs.writeFile(OUTPUT_PDF, pdfBytes);
