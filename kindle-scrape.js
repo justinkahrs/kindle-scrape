@@ -2,6 +2,7 @@ const puppeteer = require("puppeteer");
 const fs = require("fs-extra");
 const path = require("path");
 const readline = require("readline");
+const { exec } = require("child_process");
 
 // Helper function for prompting user input
 function prompt(question) {
@@ -105,4 +106,11 @@ const VIEWPORT_HEIGHT = 1400;
 
   console.log("Screenshots captured. Closing browser...");
   await browser.close();
+  exec("node screenshots-to-pdf.js", (error, stdout, stderr) => {
+    if (error) {
+      console.error(`Error running screenshots-to-pdf.js: ${error}`);
+      return;
+    }
+    console.log(stdout);
+  });
 })();

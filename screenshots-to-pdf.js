@@ -56,6 +56,11 @@ async function selectDirectory(dirs) {
       }
     }
 
+    if (typeof process.stdin.setRawMode !== 'function') {
+      console.log("Interactive mode not supported, defaulting to first directory.");
+      resolve(dirs[0]);
+      return;
+    }
     process.stdin.setRawMode(true);
     process.stdin.resume();
     process.stdin.on("data", onData);
