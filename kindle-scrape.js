@@ -37,7 +37,11 @@ const VIEWPORT_HEIGHT = 1400;
   });
 
   const page = await browser.newPage();
-  await page.setViewport({ width: VIEWPORT_WIDTH, height: VIEWPORT_HEIGHT });
+  await page.setViewport({
+    width: VIEWPORT_WIDTH,
+    height: VIEWPORT_HEIGHT,
+    deviceScaleFactor: 2,
+  });
 
   // Navigate to Kindle Reader
   await page.goto(AMAZON_KINDLE_URL, { waitUntil: "networkidle2" });
