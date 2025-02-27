@@ -86,7 +86,7 @@ async function selectDirectory(dirs) {
   let chosenBook;
   if (process.argv[2] && dirs.includes(process.argv[2])) {
     chosenBook = process.argv[2];
-    console.log(`Using book directory: ${chosenBook}`);
+    console.log(`Using screenshot directory: ${chosenBook}`);
   } else {
     // Use the interactive menu to select a directory.
     chosenBook = await selectDirectory(dirs);

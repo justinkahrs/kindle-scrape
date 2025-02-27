@@ -77,7 +77,14 @@ const VIEWPORT_HEIGHT = 1400;
   let pageIndex = 1;
   while (true) {
     // Capture screenshot as a buffer
-    const screenshotBuffer = await page.screenshot({ fullPage: false });
+    const screenshotBuffer = await page.screenshot({
+      clip: {
+        x: 0,
+        y: 60,
+        width: VIEWPORT_WIDTH,
+        height: VIEWPORT_HEIGHT - 60
+      }
+    });
 
     // Compare with the previous screenshot using Buffer.compare
     if (
