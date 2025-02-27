@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Kindle Scraper UI</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        margin: 20px;
+      }
+      #log {
+        width: 100%;
+        height: 200px;
+        background: #f0f0f0;
+        padding: 10px;
+        overflow-y: auto;
+        margin-top: 10px;
+        white-space: pre-wrap;
+      }
+      #pdf-list {
+        margin-top: 10px;
+      }
+      .pdf-item {
+        margin: 5px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Kindle Scraper App</h1>
+    <div>
+      <label for="bookName">Book Name:</label>
+      <input type="text" id="bookName" />
+      <button id="startScrape">START</button>
+    </div>
+    
+    <div id="log"></div>
+
+    <h2>Available PDFs:</h2>
+    <div id="pdf-list"></div>
+
+    <script src="renderer.js"></script>
+  </body>
+</html>

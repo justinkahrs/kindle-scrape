@@ -6,12 +6,17 @@
   "scripts": {
     "scrape": "node kindle-scrape.js",
     "pdf": "node screenshots-to-pdf.js",
-    "clean": "node clean-screenshots.js"
+    "clean": "node clean-screenshots.js",
+    "start": "electron electron-main.js"
   },
   "dependencies": {
     "fs-extra": "^11.1.1",
     "pdf-lib": "^1.17.1",
-    "puppeteer": "^24.3.0"
+    "puppeteer": "^24.3.0",
+    "puppeteer-core": "^24.3.0"
+  },
+  "devDependencies": {
+    "electron": "^24.2.0"
   },
   "author": "",
   "license": "MIT"
