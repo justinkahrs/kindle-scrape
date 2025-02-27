@@ -84,7 +84,7 @@ const VIEWPORT_HEIGHT = 1400;
       previousScreenshot &&
       Buffer.compare(screenshotBuffer, previousScreenshot) === 0
     ) {
-      console.log("Screenshot identical to previous one. Ending capture.");
+      console.log("\nScreenshot identical to previous one. Ending capture.");
       break;
     }
 
@@ -104,11 +104,13 @@ const VIEWPORT_HEIGHT = 1400;
 
     pageIndex++;
   }
-  console.log('');
+  console.log("");
 
   console.log("Screenshots captured. Closing browser...");
   await browser.close();
-  const pdfProcess = spawn("node", ["screenshots-to-pdf.js", bookName], { stdio: "inherit" });
+  const pdfProcess = spawn("node", ["screenshots-to-pdf.js", bookName], {
+    stdio: "inherit",
+  });
   pdfProcess.on("close", (code) => {
     process.exit(code);
   });
