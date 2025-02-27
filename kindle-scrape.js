@@ -82,7 +82,7 @@ const VIEWPORT_HEIGHT = 1400;
         x: 0,
         y: 60,
         width: VIEWPORT_WIDTH,
-        height: VIEWPORT_HEIGHT - 60
+        height: VIEWPORT_HEIGHT - 60 - 44
       }
     });
 
